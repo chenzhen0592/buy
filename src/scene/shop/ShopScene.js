@@ -4,9 +4,9 @@ import React,{PureComponent} from 'react'
 import {View,Text,Button} from 'react-native'
 
 
-class ShopScene extends PureComponent<{}>{
-  constructor(){
-    super()
+class ShopScene extends PureComponent<Props, State>{
+  constructor(props:Props){
+    super(props)
 
   }
 

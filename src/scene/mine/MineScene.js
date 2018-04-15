@@ -4,9 +4,9 @@ import React,{PureComponent} from 'react'
 import {View,Text} from 'react-native'
 
 
-class MineScene extends PureComponent<{}>{
-  constructor(){
-    super()
+class MineScene extends PureComponent<Props, State>{
+  constructor(props:Props){
+    super(props)
 
   }
 

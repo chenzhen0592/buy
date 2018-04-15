@@ -23,7 +23,19 @@ const MineStack=StackNavigator({
   Mine:{screen:MineScene}
 })
 
-export default TabNavigator({
+class RootScene extends PureComponent<{}>{
+  constructor() {
+      super()
+  }
+  render(){
+    return (
+      <Tab></Tab>
+    )
+  }
+}
+
+const Tab= TabNavigator(
+  {
   Shop:{screen:ShopStack},
   Category:{screen:CategoryStack},
   Cart:{screen:ShoppingCartStack},
@@ -49,3 +61,5 @@ export default TabNavigator({
   })
 }
 )
+
+export default RootScene

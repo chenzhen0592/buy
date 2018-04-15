@@ -4,9 +4,9 @@ import React,{PureComponent} from 'react'
 import {View,Text} from 'react-native'
 
 
-class CategoryScene extends PureComponent<{}>{
-  constructor(){
-    super()
+class CategoryScene extends PureComponent<Props, State>{
+  constructor(props:Props){
+    super(props)
 
   }
 
