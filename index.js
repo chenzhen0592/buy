@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import RootScene from './src/scene/RootScene';
 
-AppRegistry.registerComponent('buy', () => App);
+AppRegistry.registerComponent('buy', () => RootScene);
