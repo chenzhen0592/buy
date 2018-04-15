@@ -1,7 +1,7 @@
 
 import React,{PureComponent} from 'react'
 
-import {StyleSheet,View,Text,Button,TouchableOpacity} from 'react-native'
+import {StyleSheet,View,Text,Button,TouchableOpacity,FlatList,ScrollView} from 'react-native'
 import NavigationItem from '../../widget/NavigationItem'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import screen from '../../common/screen'
@@ -28,19 +28,81 @@ class ShopScene extends PureComponent<Props, State>{
   constructor(props:Props){
     super(props)
 
+    this.state={
+      dataList:[],
+      refreshing:false,
+      currentPage: 0
+    }
   }
+  keyExtractor(item: Object, index: number){
+    return item.id;
+  }
+  renderItem(){
+    //re
+  }
+  requestData(){
+    //return []
+  }
+  onScroll(e){
+    let x = e.nativeEvent.contentOffset.x
+    let currentPage = Math.round(x / screen.width)
 
+    console.log('onScroll  ' + e.nativeEvent.contentOffset.x + '  page ' + currentPage + '  current ' + this.state.currentPage)
+    if (this.state.currentPage != currentPage) {
+        this.setState({
+            currentPage: currentPage
+        })
+    }
+  }
+  renderHeader(){
+    return (
+        <View>
+              <ScrollView
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                onScroll={(e)=>this.onScroll}
+                //onScroll={(e) => this.onScroll(e)}
+                >
+                <View style={styles.topImageContainer}>
+                  <View style={styles.itemView}>
+                    <Ionicons size={50} name={'ios-notifications-outline'}></Ionicons>
+                  </View>
+                  <View style={styles.itemView}>
+                    <Ionicons size={50} name={'ios-search-outline'}></Ionicons>
+                  </View>
+
+                </View>
+              </ScrollView>
+
+        </View>
+    )
+  }
   render(){
     return(
-      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-        <Text>Buy</Text>
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.dataList}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          onRefresh={this.requestData}
+          refreshing={this.state.refreshing}
 
+          ListHeaderComponent={this.renderHeader}
+          >
+
+        </FlatList>
       </View>
     )
   }
+
 }
 
 const styles=StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:'#f3f3f3'
+  },
   searchBar:{
     width: screen.width * 0.8,
     height:30,
@@ -56,6 +118,17 @@ const styles=StyleSheet.create({
   },
   headerRight:{
     margin:8
+  },
+  topImageContainer:{
+    //flex:1,
+    flexDirection:'row',
+    //justifyContent:'center',
+    //alignItems:'center',
+  },
+  itemView:{
+    width:screen.width,
+    flexDirection:'row',
+    flexWrap:'wrap'
   }
 })
 
