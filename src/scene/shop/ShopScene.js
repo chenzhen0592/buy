@@ -1,9 +1,10 @@
 
 import React,{PureComponent} from 'react'
 
-import {StyleSheet,View,Text,Button,TouchableOpacity,FlatList,ScrollView} from 'react-native'
+import {StyleSheet,View,Text,Image,Button,TouchableOpacity,FlatList,ScrollView} from 'react-native'
 import NavigationItem from '../../widget/NavigationItem'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import PageControl from 'react-native-page-control';
 import screen from '../../common/screen'
 import {Paragraph} from '../../widget/Text'
 
@@ -54,7 +55,11 @@ class ShopScene extends PureComponent<Props, State>{
         })
     }
   }
+  onItemTap(){
+
+  }
   renderHeader(){
+    let pageCount=3;
     return (
         <View>
               <ScrollView
@@ -66,15 +71,30 @@ class ShopScene extends PureComponent<Props, State>{
                 >
                 <View style={styles.topImageContainer}>
                   <View style={styles.itemView}>
-                    <Ionicons size={50} name={'ios-notifications-outline'}></Ionicons>
+                    <Image style={styles.image} source={require('../../img/car.png')}></Image>
+
                   </View>
                   <View style={styles.itemView}>
-                    <Ionicons size={50} name={'ios-search-outline'}></Ionicons>
+                    <Image style={styles.image} source={require('../../img/arrival.png')}></Image>
+                  </View>
+                  <View style={styles.itemView}>
+                    <Image style={styles.image} source={require('../../img/seller.png')}></Image>
                   </View>
 
                 </View>
               </ScrollView>
+              <PageControl
+                style={styles.pageControl}
+                numberOfPages={pageCount}
+                currentPage={0}
+                hidesForSinglePage
+                pageIndicatorTintColor='gray'
+                currentPageIndicatorTintColor='white'
+                indicatorSize={{width:8, height:8}}
+                //onPageIndicatorPress={this.onItemTap}
+                >
 
+              </PageControl>
         </View>
     )
   }
@@ -129,6 +149,13 @@ const styles=StyleSheet.create({
     width:screen.width,
     flexDirection:'row',
     flexWrap:'wrap'
+  },
+  image:{
+    width:screen.width,
+    height:140
+  },
+  pageControl:{
+    //margin:8
   }
 })
 
