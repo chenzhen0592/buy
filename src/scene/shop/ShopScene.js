@@ -6,7 +6,7 @@ import NavigationItem from '../../widget/NavigationItem'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import PageControl from 'react-native-page-control';
 import screen from '../../common/screen'
-import {Paragraph} from '../../widget/Text'
+import {Paragraph,Heading2,Heading3} from '../../widget/Text'
 
 
 class ShopScene extends PureComponent<Props, State>{
@@ -26,6 +26,7 @@ class ShopScene extends PureComponent<Props, State>{
     ),
     headerStyle: {backgroundColor: '#06C1AE'},
   })
+
   constructor(props:Props){
     super(props)
 
@@ -58,10 +59,58 @@ class ShopScene extends PureComponent<Props, State>{
   onItemTap(){
 
   }
+  renderTopEightItem(){
+    let items=[];
+
+    for(var i=0;i<2;i++){
+      let rowItems=[];
+      for(var j=0;j<4;j++){
+        let item=(
+          <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/4,height:screen.height/3}}>
+            <Image source={require('../../img/smallpic.png')} style={{width:screen.width/5,height:screen.height/5}}></Image>
+            <Heading3>seller</Heading3>
+          </TouchableOpacity>
+        )
+      }
+      let row=(
+        <View style={{flexDirection:'row',width:screen.width}}>
+          {rowItems}
+        </View>
+      )
+      items.push(row)
+    }
+    return (
+      <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+        {items}
+      </View>
+      )
+  }
   renderHeader(){
     let pageCount=3;
+    let items=[];
+
+    for(var i=0;i<2;i++){
+      let rowItems=[];
+      for(var j=0;j<4;j++){
+        let item=(
+          <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/4,height:screen.height/6}}>
+            <Image source={require('../../img/smallpic.png')} style={{width:screen.width/7,height:screen.width/7,borderRadius:screen.width/14}}></Image>
+            <Paragraph>Best Seller</Paragraph>
+          </TouchableOpacity>
+        )
+        rowItems.push(item)
+      }
+      let row=(
+        <View style={{flexDirection:'row',width:screen.width}} key={i}>
+          {rowItems}
+        </View>
+      )
+      items.push(row)
+    }
+
     return (
-        <View>
+      <View>
+        <View style={{backgroundColor:'white'}}>
               <ScrollView
                 horizontal
                 pagingEnabled
@@ -93,9 +142,12 @@ class ShopScene extends PureComponent<Props, State>{
                 indicatorSize={{width:8, height:8}}
                 //onPageIndicatorPress={this.onItemTap}
                 >
-
               </PageControl>
         </View>
+        <View style={{flexDirection:'row',flexWrap:'wrap',backgroundColor:'white'}}>
+          {items}
+        </View>
+      </View>
     )
   }
   render(){
@@ -152,10 +204,11 @@ const styles=StyleSheet.create({
   },
   image:{
     width:screen.width,
-    height:140
+    height:screen.height/5
   },
   pageControl:{
-    //margin:8
+    margin:10,
+    marginTop:-10
   }
 })
 
