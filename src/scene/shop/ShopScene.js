@@ -8,6 +8,15 @@ import PageControl from 'react-native-page-control';
 import screen from '../../common/screen'
 import {Paragraph,Heading2,Heading3} from '../../widget/Text'
 
+type Props = {
+    menuInfos: Array<Object>,
+    onMenuSelected: Function,
+}
+type State = {
+    dataList:Array,
+    refreshing:boolean,
+    currentPage: number
+}
 
 class ShopScene extends PureComponent<Props, State>{
   static navigationOptions=({navigation}:any)=>({
@@ -27,7 +36,7 @@ class ShopScene extends PureComponent<Props, State>{
     headerStyle: {backgroundColor: '#06C1AE'},
   })
 
-  constructor(props:Props){
+  constructor(props:Object){
     super(props)
 
     this.state={
@@ -48,12 +57,13 @@ class ShopScene extends PureComponent<Props, State>{
   onScroll(e){
     let x = e.nativeEvent.contentOffset.x
     let currentPage = Math.round(x / screen.width)
-
     console.log('onScroll  ' + e.nativeEvent.contentOffset.x + '  page ' + currentPage + '  current ' + this.state.currentPage)
     if (this.state.currentPage != currentPage) {
         this.setState({
             currentPage: currentPage
         })
+
+        console.log(this.state.currentPage)
     }
   }
   onItemTap(){
@@ -85,7 +95,9 @@ class ShopScene extends PureComponent<Props, State>{
       </View>
       )
   }
-  renderHeader(){
+
+  //renderHeader(){}
+  renderHeader=()=>{
     let pageCount=3;
     let items=[];
 
@@ -93,7 +105,7 @@ class ShopScene extends PureComponent<Props, State>{
       let rowItems=[];
       for(var j=0;j<4;j++){
         let item=(
-          <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/4,height:screen.height/6}}>
+          <TouchableOpacity key={j} style={{justifyContent:'center',alignItems:'center',width:screen.width/4,height:screen.height/6}}>
             <Image source={require('../../img/smallpic.png')} style={{width:screen.width/7,height:screen.width/7,borderRadius:screen.width/14}}></Image>
             <Paragraph>Best Seller</Paragraph>
           </TouchableOpacity>
@@ -115,8 +127,8 @@ class ShopScene extends PureComponent<Props, State>{
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
-                onScroll={(e)=>this.onScroll}
-                //onScroll={(e) => this.onScroll(e)}
+                onScroll={(e)=>this.onScroll(e)}
+                scrollEventThrottle={16}
                 >
                 <View style={styles.topImageContainer}>
                   <View style={styles.itemView}>
@@ -135,12 +147,12 @@ class ShopScene extends PureComponent<Props, State>{
               <PageControl
                 style={styles.pageControl}
                 numberOfPages={pageCount}
-                currentPage={0}
+                currentPage={this.state.currentPage}
                 hidesForSinglePage
                 pageIndicatorTintColor='gray'
                 currentPageIndicatorTintColor='white'
                 indicatorSize={{width:8, height:8}}
-                //onPageIndicatorPress={this.onItemTap}
+                onPageIndicatorPress={this.onItemTap}
                 >
               </PageControl>
         </View>

@@ -24,8 +24,8 @@ const MineStack=StackNavigator({
 })
 
 class RootScene extends PureComponent<{}>{
-  constructor() {
-      super()
+  constructor(props) {
+      super(props)
   }
   render(){
     return (
