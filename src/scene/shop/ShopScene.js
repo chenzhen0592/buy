@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import PageControl from 'react-native-page-control';
 import screen from '../../common/screen'
 import {Paragraph,Heading2,Heading3} from '../../widget/Text'
+//import Separator from '../../widget/Sep'
 
 type Props = {
     menuInfos: Array<Object>,
@@ -76,35 +77,6 @@ class ShopScene extends PureComponent<Props, State>{
       let rowItems=[];
       for(var j=0;j<4;j++){
         let item=(
-          <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/4,height:screen.height/3}}>
-            <Image source={require('../../img/smallpic.png')} style={{width:screen.width/5,height:screen.height/5}}></Image>
-            <Heading3>seller</Heading3>
-          </TouchableOpacity>
-        )
-      }
-      let row=(
-        <View style={{flexDirection:'row',width:screen.width}}>
-          {rowItems}
-        </View>
-      )
-      items.push(row)
-    }
-    return (
-      <View style={{flexDirection:'row',flexWrap:'wrap'}}>
-        {items}
-      </View>
-      )
-  }
-
-  //renderHeader(){}
-  renderHeader=()=>{
-    let pageCount=3;
-    let items=[];
-
-    for(var i=0;i<2;i++){
-      let rowItems=[];
-      for(var j=0;j<4;j++){
-        let item=(
           <TouchableOpacity key={j} style={{justifyContent:'center',alignItems:'center',width:screen.width/4,height:screen.height/6}}>
             <Image source={require('../../img/smallpic.png')} style={{width:screen.width/7,height:screen.width/7,borderRadius:screen.width/14}}></Image>
             <Paragraph>Best Seller</Paragraph>
@@ -119,46 +91,103 @@ class ShopScene extends PureComponent<Props, State>{
       )
       items.push(row)
     }
+    return (
+      <View style={{flexDirection:'row',flexWrap:'wrap',backgroundColor:'white'}}>
+        {items}
+      </View>
+      )
+  }
+
+  renerTopScroll(){
+    let pageCount=3;
+    return (
+      <View style={{backgroundColor:'white'}}>
+            <ScrollView
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              onScroll={(e)=>this.onScroll(e)}
+              scrollEventThrottle={16}
+              >
+              <View style={styles.topImageContainer}>
+                <View style={styles.itemView}>
+                  <Image style={styles.image} source={require('../../img/car.png')}></Image>
+
+                </View>
+                <View style={styles.itemView}>
+                  <Image style={styles.image} source={require('../../img/arrival.png')}></Image>
+                </View>
+                <View style={styles.itemView}>
+                  <Image style={styles.image} source={require('../../img/seller.png')}></Image>
+                </View>
+
+              </View>
+            </ScrollView>
+            <PageControl
+              style={styles.pageControl}
+              numberOfPages={pageCount}
+              currentPage={this.state.currentPage}
+              hidesForSinglePage
+              pageIndicatorTintColor='gray'
+              currentPageIndicatorTintColor='white'
+              indicatorSize={{width:8, height:8}}
+              onPageIndicatorPress={this.onItemTap}
+              >
+            </PageControl>
+      </View>
+    )
+  }
+
+  renderDeals(){
+
+    return (
+      <View style={{flexDirection:'row',flexWrap:'wrap',backgroundColor:'white',width:screen.width,height:screen.height/4}}>
+        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',width:screen.width,height:30}}>
+            <Heading2>Flash Deals </Heading2>
+            <Text style={{color:'#c47ed2',fontWeight:'bold'}}>07:31:53</Text>
+        </View>
+
+        <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/3}}>
+          <Image source={require('../../img/smallpic.png')} style={{width:screen.width/4,height:100,margin:5}}></Image>
+          <Heading2>S$ 69.0</Heading2>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{fontSize:13,textDecorationLine:'line-through',textDecorationStyle: "solid",textDecorationColor: "#000"}}>S$ 81.59 </Text>
+            <Text style={{color:'#e39b63',fontSize:13}}>15% OFF</Text>
+          </View>
+
+        </TouchableOpacity>
+        <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/3}}>
+          <Image source={require('../../img/smallpic.png')} style={{width:screen.width/4,height:100,margin:5}}></Image>
+          <Heading2>S$ 69.0</Heading2>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{fontSize:13,textDecorationLine:'line-through',textDecorationStyle: "solid",textDecorationColor: "#000"}}>S$ 81.59 </Text>
+            <Text style={{color:'#e39b63',fontSize:13}}>15% OFF</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/3}}>
+          <Image source={require('../../img/smallpic.png')} style={{width:screen.width/4,height:100,margin:5}}></Image>
+          <Heading2>S$ 69.0</Heading2>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{fontSize:13,textDecorationLine:'line-through',textDecorationStyle: "solid",textDecorationColor: "#000"}}>S$ 81.59 </Text>
+            <Text style={{color:'#e39b63',fontSize:13}}>15% OFF</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+  //renderHeader(){}
+  renderHeader=()=>{
 
     return (
       <View>
-        <View style={{backgroundColor:'white'}}>
-              <ScrollView
-                horizontal
-                pagingEnabled
-                showsHorizontalScrollIndicator={false}
-                onScroll={(e)=>this.onScroll(e)}
-                scrollEventThrottle={16}
-                >
-                <View style={styles.topImageContainer}>
-                  <View style={styles.itemView}>
-                    <Image style={styles.image} source={require('../../img/car.png')}></Image>
+        {this.renerTopScroll()}
+        {this.renderTopEightItem()}
+        <View style={{width:screen.width,
+        height:screen.onePixel*20,
+        backgroundColor:'#e0e0e0'}}>
 
-                  </View>
-                  <View style={styles.itemView}>
-                    <Image style={styles.image} source={require('../../img/arrival.png')}></Image>
-                  </View>
-                  <View style={styles.itemView}>
-                    <Image style={styles.image} source={require('../../img/seller.png')}></Image>
-                  </View>
-
-                </View>
-              </ScrollView>
-              <PageControl
-                style={styles.pageControl}
-                numberOfPages={pageCount}
-                currentPage={this.state.currentPage}
-                hidesForSinglePage
-                pageIndicatorTintColor='gray'
-                currentPageIndicatorTintColor='white'
-                indicatorSize={{width:8, height:8}}
-                onPageIndicatorPress={this.onItemTap}
-                >
-              </PageControl>
         </View>
-        <View style={{flexDirection:'row',flexWrap:'wrap',backgroundColor:'white'}}>
-          {items}
-        </View>
+        {this.renderDeals()}
       </View>
     )
   }
