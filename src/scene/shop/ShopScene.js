@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import PageControl from 'react-native-page-control';
 import screen from '../../common/screen'
 import {Paragraph,Heading2,Heading3} from '../../widget/Text'
+import color from '../../widget/Color'
 //import Separator from '../../widget/Sep'
 
 type Props = {
@@ -34,7 +35,7 @@ class ShopScene extends PureComponent<Props, State>{
         }}
         ></NavigationItem>
     ),
-    headerStyle: {backgroundColor: '#06C1AE'},
+    headerStyle: {backgroundColor: color.navHeader},
   })
 
   constructor(props:Object){
@@ -192,6 +193,10 @@ class ShopScene extends PureComponent<Props, State>{
         {this.renderDeals()}
       </View>
     )
+  }
+
+  componentWillUnmount(){
+
   }
   render(){
     return(

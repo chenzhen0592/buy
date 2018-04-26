@@ -9,7 +9,9 @@ class MineScene extends PureComponent<Props, State>{
     super(props)
 
   }
+  componentWillUnmount(){
 
+  }
   render(){
     return(
       <View>

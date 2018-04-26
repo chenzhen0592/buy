@@ -27,6 +27,9 @@ class RootScene extends PureComponent<{}>{
   constructor(props) {
       super(props)
   }
+  componentWillUnmount(){
+
+  }
   render(){
     return (
       <Tab></Tab>
