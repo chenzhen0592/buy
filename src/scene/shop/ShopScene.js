@@ -139,6 +139,32 @@ class ShopScene extends PureComponent<Props, State>{
   }
 
   renderDeals(){
+    let deals=[];
+    let deal={
+      price:'S$ 81.59',
+      salePrice:'S$ 69.0',
+      discount:'15%',
+      img:require('../../img/smallpic.png')
+    }
+    deals.push(deal);
+    deals.push(deal);
+    deals.push(deal);
+
+    var dealItems=[];
+    for(let i=0;i<deals.length;i++){
+      let dealData=deals[i];
+      dealItems.push(
+        <TouchableOpacity key={i} style={{justifyContent:'center',alignItems:'center',width:screen.width/3}}>
+          <Image source={dealData.img} style={{width:screen.width/4,height:100,margin:5}}></Image>
+          <Heading2>{dealData.salePrice}</Heading2>
+          <View style={{flexDirection:'row'}}>
+            <Text style={{fontSize:13,textDecorationLine:'line-through',textDecorationStyle: "solid",textDecorationColor: "#000"}}>{dealData.price} </Text>
+            <Text style={{color:'#e39b63',fontSize:13}}>{dealData.discount} OFF</Text>
+          </View>
+
+        </TouchableOpacity>
+      )
+    }
 
     return (
       <View style={{flexDirection:'row',flexWrap:'wrap',backgroundColor:'white',width:screen.width,height:screen.height/4}}>
@@ -146,32 +172,8 @@ class ShopScene extends PureComponent<Props, State>{
             <Heading2>Flash Deals </Heading2>
             <Text style={{color:'#c47ed2',fontWeight:'bold'}}>07:31:53</Text>
         </View>
+        {dealItems}
 
-        <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/3}}>
-          <Image source={require('../../img/smallpic.png')} style={{width:screen.width/4,height:100,margin:5}}></Image>
-          <Heading2>S$ 69.0</Heading2>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{fontSize:13,textDecorationLine:'line-through',textDecorationStyle: "solid",textDecorationColor: "#000"}}>S$ 81.59 </Text>
-            <Text style={{color:'#e39b63',fontSize:13}}>15% OFF</Text>
-          </View>
-
-        </TouchableOpacity>
-        <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/3}}>
-          <Image source={require('../../img/smallpic.png')} style={{width:screen.width/4,height:100,margin:5}}></Image>
-          <Heading2>S$ 69.0</Heading2>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{fontSize:13,textDecorationLine:'line-through',textDecorationStyle: "solid",textDecorationColor: "#000"}}>S$ 81.59 </Text>
-            <Text style={{color:'#e39b63',fontSize:13}}>15% OFF</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={{justifyContent:'center',alignItems:'center',width:screen.width/3}}>
-          <Image source={require('../../img/smallpic.png')} style={{width:screen.width/4,height:100,margin:5}}></Image>
-          <Heading2>S$ 69.0</Heading2>
-          <View style={{flexDirection:'row'}}>
-            <Text style={{fontSize:13,textDecorationLine:'line-through',textDecorationStyle: "solid",textDecorationColor: "#000"}}>S$ 81.59 </Text>
-            <Text style={{color:'#e39b63',fontSize:13}}>15% OFF</Text>
-          </View>
-        </TouchableOpacity>
       </View>
     )
   }
